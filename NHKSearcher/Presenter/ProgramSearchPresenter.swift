@@ -30,12 +30,12 @@ class ProgramSearchPresenter: ObservableObject {
         isNotFound = false
         error = nil
         
-        model.fetchProgram(area: area, service: service, date: date, apiKey: apiKey) { [weak self] result in
-            switch result{
+        model.fetchProgram(area: area) { [weak self] result in
+            switch result {
             case .success(let programs):
-                if !programs.isEmpty{
+                if !programs.isEmpty {
                     self?.programs = programs
-                } else{
+                } else {
                     self?.isNotFound = true
                 }
             case .failure(let error):

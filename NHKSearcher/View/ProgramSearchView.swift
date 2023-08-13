@@ -16,17 +16,28 @@ struct ProgramSearchView: View {
     }
     
     var body: some View {
-        NavigationLink(<#LocalizedStringKey#>) {
+        NavigationView {
             VStack {
                 TextField("area", text: $searchText)
                     .onChange(of: searchText) { _ in
                         presenter.loadStart(area: searchText)
                     }
-                    .textFieldStyle(RoundedBorderTextFieldStyle()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.asciiCapable)
                     .padding()
+                if let error = presenter.error{
+                    Text(error.localizedDescription)
+                } else {
+                    List(presenter.programs) { program in
+                        presenter.router.navigationLink(program: program)
+                    }
+                    .refreshable {
+                        presenter.loadStart(area: searchText);<#code#>
+                    }
+                }
             }
         }
+        .navigationTitle("Search NHK Program")
     }
 }
 

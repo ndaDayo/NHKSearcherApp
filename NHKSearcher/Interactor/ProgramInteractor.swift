@@ -7,30 +7,30 @@
 
 import Foundation
 
-protocol ModelInput{
-    func fetchProgram(area: String, service: String, date: String, apiKey: String, completion: @escaping (Result<[Program], ModelError>) -> Void)
+protocol ModelInput {
+    func fetchProgram(area: String, completion: @escaping (Result<[Program], ModelError>) -> Void)
 }
 
-struct ProgramInteractor: ModelInput{
-    private var endpoint: URLComponents{
+struct ProgramInteractor: ModelInput {
+    private var endpoint: URLComponents {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.nhk.or.jp"
         return components
     }
     
-    func fetchProgram(area: String, service: String, date: String, apiKey: String, completion: (Result<[Program], ModelError>) -> Void) {
-        guard let url = programSearchEndpoint(area: area, service: service, date: date, apiKey: apiKey) else {
+    func fetchProgram(area: String, completion: (Result<[Program], ModelError>) -> Void) {
+        guard let url = programSearchEndpoint(area: area) else {
                     completion(.failure(.urlError))
                     return
                 }
         
-        Task{
+        Task {
             let result = await fetch(url: url)
             
-            switch result{
+            switch result {
             case .success(let data):
-                guard let programs = try? JSONDecoder().decode(Programs.self, from: data) else{
+                guard let programs = try? JSONDecoder().decode(Programs.self, from: data) else {
                     completion(.failure(.jsonParseError(String(data: data, encoding: .utf8) ?? "")))
                     return
                 }
@@ -41,9 +41,9 @@ struct ProgramInteractor: ModelInput{
         }
     }
     
-    private func programSearchEndpoint(area: String, service: String, date: String, apiKey: String) -> URL? {
+    private func programSearchEndpoint(area: String) -> URL? {
         var urlComponents = URLComponents()
-        urlComponents.path = "/v2/pg/list/\(area)/\(service)/\(date).json"
+        urlComponents.path = "/v2/pg/list/130/g1/2023-08-13.json"
         urlComponents.queryItems = [
             URLQueryItem(name: "key", value: apiKey)
         ]
@@ -52,7 +52,7 @@ struct ProgramInteractor: ModelInput{
     }
     
     @MainActor
-    private func fetch(url: URL) async -> Result<Data, Error>{
+    private func fetch(url: URL) async -> Result<Data, Error> {
         do {
             let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
             return .success(data)

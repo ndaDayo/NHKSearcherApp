@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct Programs : Codable{
+struct Programs : Codable {
     let totalCount: Int
     let incompleteResults: Bool
     let items: [Program]
     
-    private enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case incompleteResults = "incomplete_results"
         case items
     }
 }
 
-struct Program: Codable, Identifiable{
+struct Program: Codable, Identifiable {
     var id = UUID()
     var area: String
     var title: String
