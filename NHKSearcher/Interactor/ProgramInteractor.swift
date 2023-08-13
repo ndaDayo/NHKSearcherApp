@@ -20,10 +20,28 @@ struct ProgramInteractor: ModelInput{
     }
     
     func fetchProgram(query: String, completion: (Result<[Program], ModelError>) -> Void) {
-        guard !query.isEmpty, let programSearchEndpoint(query: query) else{
+        guard !query.isEmpty, case _ = programSearchEndpoint(query: query) else{
             completion(.failure(.urlError))
             return
         }
         
+        Task{
+            let result = await fetch(url: url)
+        }
+    }
+    
+    private func programSearchEndpoint(query: String) -> URL?{
+        guard let encodeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else{
+            return nil
+        }
+        
+        var urlComponents = endpoint
+        urlComponents.path = "/v2/pg/list"
+        urlComponents.path = encodeQuery
+        quard let url = urlComponents.url else{
+            return nil
+        }
+        
+        return url
     }
 }
