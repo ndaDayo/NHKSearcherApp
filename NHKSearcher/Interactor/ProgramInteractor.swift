@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ModelInput{
-    func fetchProgram(query: String, completion: @escaping (Result<[Program], ModelError>) -> Void)
+    func fetchProgram(area: String, service: String, date: String, apiKey: String, completion: @escaping (Result<[Program], ModelError>) -> Void)
 }
 
 struct ProgramInteractor: ModelInput{
@@ -19,29 +19,34 @@ struct ProgramInteractor: ModelInput{
         return components
     }
     
-    func fetchProgram(query: String, completion: (Result<[Program], ModelError>) -> Void) {
-        guard !query.isEmpty, case _ = programSearchEndpoint(query: query) else{
-            completion(.failure(.urlError))
-            return
-        }
+    func fetchProgram(area: String, service: String, date: String, apiKey: String, completion: (Result<[Program], ModelError>) -> Void) {
+        guard let url = programSearchEndpoint(area: area, service: service, date: date, apiKey: apiKey) else {
+                    completion(.failure(.urlError))
+                    return
+                }
         
         Task{
             let result = await fetch(url: url)
         }
     }
     
-    private func programSearchEndpoint(query: String) -> URL?{
-        guard let encodeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else{
-            return nil
-        }
+    private func programSearchEndpoint(area: String, service: String, date: String, apiKey: String) -> URL? {
+        var urlComponents = URLComponents()
+        urlComponents.path = "/v2/pg/list/\(area)/\(service)/\(date).json"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "key", value: apiKey)
+        ]
         
-        var urlComponents = endpoint
-        urlComponents.path = "/v2/pg/list"
-        urlComponents.path = encodeQuery
-        quard let url = urlComponents.url else{
-            return nil
+        return urlComponents.url
+    }
+    
+    @MainActor
+    private func fetch(url: URL) async -> Result<Data, Error>{
+        do {
+            let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+            return .success(data)
+        } catch {
+            return .failure(error)
         }
-        
-        return url
     }
 }
