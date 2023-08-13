@@ -27,6 +27,17 @@ struct ProgramInteractor: ModelInput{
         
         Task{
             let result = await fetch(url: url)
+            
+            switch result{
+            case .success(let data):
+                guard let programs = try? JSONDecoder().decode(Programs.self, from: data) else{
+                    completion(.failure(.jsonParseError(String(data: data, encoding: .utf8) ?? "")))
+                    return
+                }
+                completion(.success(programs.items))
+            case .failure(let error):
+                completion(.failure(.responseError(error)))
+            }
         }
     }
     
