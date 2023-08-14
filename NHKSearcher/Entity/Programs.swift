@@ -20,7 +20,9 @@ struct Programs: Codable {
 }
 
 struct Program: Codable, Identifiable {
-    var id = UUID()
+    let id = UUID()
     var area: String
     var title: String
+    
+    static let mock = Program(area: "03", title: "mock title")
 }

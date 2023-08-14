@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 class ProgramSearchPresenter: ObservableObject {
     let router = ProgramSearchRouter()
@@ -30,17 +31,18 @@ class ProgramSearchPresenter: ObservableObject {
         error = nil
         
         model.fetchProgram(area: area) { [weak self] result in
-            switch result {
-            case .success(let programs):
+            DispatchQueue.main.async {
+               switch result {
+               case .success(let programs):
                 if !programs.isEmpty {
                     self?.programs = programs
                 } else {
                     self?.isNotFound = true
-                }
-            case .failure(let error):
+               }
+               case .failure(let error):
                 self?.error = error
+               }
             }
-            self?.objectWillChange.send()
         }
     }
 }

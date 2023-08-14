@@ -9,6 +9,6 @@ import SwiftUI
 
 struct ProgramSearchRouter {
     func navigationLink(program: Program) -> some View {
-        return NavigationLink("Program Details", destination: ProgramRow())
+        return NavigationLink("Program Details", destination: ProgramRow(program: program))
     }
 }

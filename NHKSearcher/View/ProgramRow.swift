@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct ProgramRow: View {
+    let program: Program
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(program.title)
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+        }
     }
 }
 
 struct ProgramRow_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramRow()
+        ProgramRow(program: Program.mock)
     }
 }
