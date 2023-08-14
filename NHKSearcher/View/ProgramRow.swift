@@ -18,9 +18,3 @@ struct ProgramRow: View {
         }
     }
 }
-
-struct ProgramRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgramRow(program: Program.mock)
-    }
-}

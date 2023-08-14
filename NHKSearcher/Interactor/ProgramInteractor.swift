@@ -42,8 +42,8 @@ struct ProgramInteractor: ModelInput {
     }
     
     private func programSearchEndpoint(area: String) -> URL? {
-        var urlComponents = URLComponents()
-        urlComponents.path = "/v2/pg/list/130/g1/2023-08-13.json?key=_ENTER_YOUR_KEY_"
+        var urlComponents = endpoint
+        urlComponents.path = "/v2/pg/list/130/g1/2023-08-14.json?key=\(APIKeys.accessKey)"
         
         return urlComponents.url
     }

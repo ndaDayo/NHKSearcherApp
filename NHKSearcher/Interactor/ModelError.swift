@@ -16,9 +16,9 @@ enum ModelError: Error {
     var localizedDescription: String {
         switch self {
         case .urlError: return "url error"
-        case .responseError(_): return "api error"
+        case .responseError: return "api error"
         case .responseDataEmpty: return "response is nil"
-        case .jsonParseError(_): return "json parse error"
+        case .jsonParseError: return "json parse error"
         }
     }
 }
