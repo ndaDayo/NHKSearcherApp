@@ -19,7 +19,7 @@ struct ProgramInteractor: ModelInput {
         return components
     }
     
-    func fetchProgram(area: String, completion: (Result<[Program], ModelError>) -> Void) {
+    func fetchProgram(area: String, completion: @escaping (Result<[Program], ModelError>) -> Void) {
         guard let url = programSearchEndpoint(area: area) else {
                     completion(.failure(.urlError))
                     return
@@ -43,10 +43,7 @@ struct ProgramInteractor: ModelInput {
     
     private func programSearchEndpoint(area: String) -> URL? {
         var urlComponents = URLComponents()
-        urlComponents.path = "/v2/pg/list/130/g1/2023-08-13.json"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "key", value: apiKey)
-        ]
+        urlComponents.path = "/v2/pg/list/130/g1/2023-08-13.json?key=_ENTER_YOUR_KEY_"
         
         return urlComponents.url
     }

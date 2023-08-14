@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Programs : Codable {
+struct Programs: Codable {
     let totalCount: Int
     let incompleteResults: Bool
     let items: [Program]

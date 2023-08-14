@@ -8,13 +8,7 @@
 import SwiftUI
 
 struct ProgramSearchRouter {
-    func navigationLink(program: Program) -> some View{
-        return NavigationLink(destination: <#T##() -> Destination#>, label: <#T##() -> Label#>)
-    }
-}
-
-struct ProgramSearchRouter_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgramSearchRouter().navigationLink(program: Program.mockProgram)
+    func navigationLink(program: Program) -> some View {
+        return NavigationLink("Program Details", destination: ProgramRow())
     }
 }

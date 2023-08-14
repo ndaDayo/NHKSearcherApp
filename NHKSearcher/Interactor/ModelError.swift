@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum ModelError: Error{
+enum ModelError: Error {
     case urlError
     case responseError(Error)
     case responseDataEmpty
     case jsonParseError(String)
     
-    var localizedDescription: String{
-        switch self{
+    var localizedDescription: String {
+        switch self {
         case .urlError: return "url error"
         case .responseError(_): return "api error"
         case .responseDataEmpty: return "response is nil"

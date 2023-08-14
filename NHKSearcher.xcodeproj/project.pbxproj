@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D07ACAD2A88CF070023C90C /* ProgramRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07ACAC2A88CF070023C90C /* ProgramRow.swift */; };
 		6DA5FBB92A83C0EB005FB2AB /* NHKSearcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5FBB82A83C0EB005FB2AB /* NHKSearcherApp.swift */; };
 		6DA5FBBD2A83C0ED005FB2AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5FBBC2A83C0ED005FB2AB /* Assets.xcassets */; };
 		6DA5FBC02A83C0ED005FB2AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5FBBF2A83C0ED005FB2AB /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D07ACAC2A88CF070023C90C /* ProgramRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRow.swift; sourceTree = "<group>"; };
 		6DA5FBB52A83C0EB005FB2AB /* NHKSearcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHKSearcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5FBB82A83C0EB005FB2AB /* NHKSearcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHKSearcherApp.swift; sourceTree = "<group>"; };
 		6DA5FBBC2A83C0ED005FB2AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				6DA5FBE72A83C2CF005FB2AB /* ProgramSearchView.swift */,
+				6D07ACAC2A88CF070023C90C /* ProgramRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				6DA5FBEC2A83C8B9005FB2AB /* ProgramSearchPresenter.swift in Sources */,
 				6DA5FBF72A88BC5C005FB2AB /* ProgramSearchRouter.swift in Sources */,
 				6DA5FBEF2A83CAA6005FB2AB /* ProgramInteractor.swift in Sources */,
+				6D07ACAD2A88CF070023C90C /* ProgramRow.swift in Sources */,
 				6DA5FBF42A83CCD1005FB2AB /* Programs.swift in Sources */,
 				6DA5FBF12A83CB70005FB2AB /* ModelError.swift in Sources */,
 				6DA5FBB92A83C0EB005FB2AB /* NHKSearcherApp.swift in Sources */,

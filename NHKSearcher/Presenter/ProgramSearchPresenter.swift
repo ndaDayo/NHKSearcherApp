@@ -21,7 +21,6 @@ class ProgramSearchPresenter: ObservableObject {
         self.programs = programs
         self.isNotFound = isNotFound
         self.error = error
-        <#statements#>
     }
     
     func loadStart(area: String) {

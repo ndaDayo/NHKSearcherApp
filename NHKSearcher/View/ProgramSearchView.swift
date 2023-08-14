@@ -25,14 +25,14 @@ struct ProgramSearchView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.asciiCapable)
                     .padding()
-                if let error = presenter.error{
+                if let error = presenter.error {
                     Text(error.localizedDescription)
                 } else {
                     List(presenter.programs) { program in
                         presenter.router.navigationLink(program: program)
                     }
                     .refreshable {
-                        presenter.loadStart(area: searchText);<#code#>
+                        presenter.loadStart(area: searchText)
                     }
                 }
             }
