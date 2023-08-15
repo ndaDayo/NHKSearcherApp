@@ -11,10 +11,20 @@ struct ProgramRow: View {
     let program: Program
     
     var body: some View {
-        HStack {
+        VStack {
+            let urlString = "https:" + program.service.logoS.url
+            AsyncImage(url: URL(string: urlString))
+                .clipShape(Circle())
+                .frame(width: 10, height: 10)
+                .padding()
             Text(program.title)
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
+            Text(program.subtitle)
+        }
+        HStack {
+            Text(program.service.id)
+            Text(program.service.name)
         }
     }
 }
