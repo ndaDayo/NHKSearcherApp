@@ -42,10 +42,11 @@ struct ProgramInteractor: ModelInput {
     
     private func programSearchEndpoint(area: String) -> URL? {
         var urlComponents = endpoint
-        urlComponents.path = "/v2/pg/list/060/g1/2023-08-15.json"
+        urlComponents.path = "/v2/pg/list/\(area)/g1/2023-08-15.json"
         urlComponents.queryItems = [
             URLQueryItem(name: "key", value: AccessTokens.accessKey)
            ]
+        dump(urlComponents.url)
         return urlComponents.url
     }
     

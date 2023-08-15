@@ -18,10 +18,8 @@ struct ProgramSearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("area", text: $searchText)
-                    .onChange(of: searchText) { _ in
-                        presenter.loadStart(area: searchText)
-                    }
+                TextField("area", text: $searchText, onCommit: {     presenter.loadStart(area: searchText)
+                    })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.asciiCapable)
                     .padding()
