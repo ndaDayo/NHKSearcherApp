@@ -8,7 +8,9 @@ import Foundation
 
 struct Programs: Codable {
     let list: ProgramList
-    let items: [Program]
+    func items() -> [Program] {
+            return list.g1
+        }
 }
 
 struct ProgramList: Codable {
@@ -62,3 +64,4 @@ struct Logo: Codable {
     let width: String
     let height: String
 }
+

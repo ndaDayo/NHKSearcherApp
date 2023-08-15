@@ -18,7 +18,7 @@ enum ModelError: Error {
         case .urlError: return "url error"
         case .responseError: return "api error"
         case .responseDataEmpty: return "response is nil"
-        case .jsonParseError: return "json parse error"
+        case .jsonParseError(let message): return "json parse error: (\(message)"
         }
     }
 }

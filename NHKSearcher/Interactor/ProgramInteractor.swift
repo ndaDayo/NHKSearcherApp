@@ -27,14 +27,13 @@ struct ProgramInteractor: ModelInput {
         
         Task {
             let result = await fetch(url: url)
-            
             switch result {
             case .success(let data):
                 guard let programs = try? JSONDecoder().decode(Programs.self, from: data) else {
                     completion(.failure(.jsonParseError(String(data: data, encoding: .utf8) ?? "")))
                     return
                 }
-                completion(.success(programs.items))
+                completion(.success(programs.items()))
             case .failure(let error):
                 completion(.failure(.responseError(error)))
             }
@@ -43,8 +42,10 @@ struct ProgramInteractor: ModelInput {
     
     private func programSearchEndpoint(area: String) -> URL? {
         var urlComponents = endpoint
-        urlComponents.path = "/v2/pg/list/130/g1/2023-08-14.json?key=\(APIKeys.accessKey)"
-        
+        urlComponents.path = "/v2/pg/list/060/g1/2023-08-15.json"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "key", value: AccessTokens.accessKey)
+           ]
         return urlComponents.url
     }
     
